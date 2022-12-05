@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DataStore</string>
+    <string name="hint_register_no">register no</string>
+    <string name="title_save">Save</string>
+    <string name="title_age">age</string>
+    <string name="tv_age">Age : %d</string>
+    <string name="tv_username">Name: %s</string>
+    <string name="tv_regno">Registration No\n%d</string>
+
+</resources>
