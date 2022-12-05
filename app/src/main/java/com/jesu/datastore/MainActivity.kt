@@ -25,28 +25,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeData() {
         manager.userAgeFlow.asLiveData().observe(this) { age ->
-            age?.let {
-
-                if (it>0)
-                binding.tvAge.text = getString(R.string.tv_age,it)
-            }
+            if (age > 0)
+                age?.let {
+                    binding.tvAge.text = getString(R.string.tv_age, it)
+                }
         }
 
 
         manager.userNameFlow.asLiveData().observe(this) { name ->
-            name?.let {
-
-                if (it.isNotEmpty())
-                binding.tvName.text = getString(R.string.tv_username,it)
-            }
+            if (name.isNotEmpty())
+                name?.let {
+                    binding.tvName.text = getString(R.string.tv_username, it)
+                }
         }
 
         manager.userNoFlow.asLiveData().observe(this) { regno ->
-            regno?.let {
-
-                if (it>0L)
-                binding.tvUserno.text =getString(R.string.tv_regno,it)
-            }
+            if (regno > 0L)
+                regno?.let {
+                    binding.tvUserno.text = getString(R.string.tv_regno, it)
+                }
         }
     }
 
@@ -85,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             binding.tilUserName.isErrorEnabled = false
             binding.tilUserName.error = null
         }
-        if (age.isEmpty() || age.toInt()<=0) {
+        if (age.isEmpty() || age.toInt() <= 0) {
             binding.tilAge.isErrorEnabled = true
             binding.tilAge.error = "Field is empty"
             valResult = false
@@ -94,7 +91,7 @@ class MainActivity : AppCompatActivity() {
             binding.tilAge.isErrorEnabled = false
             binding.tilAge.error = null
         }
-        if (regNo.isEmpty() || regNo.toLong() <=0L) {
+        if (regNo.isEmpty() || regNo.toLong() <= 0L) {
             binding.tilRegNo.isErrorEnabled = true
             binding.tilRegNo.error = "Field is empty"
             valResult = false
