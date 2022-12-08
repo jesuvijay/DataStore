@@ -1,9 +1,8 @@
 package com.jesu.datastore
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.asLiveData
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.jesu.datastore.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
@@ -24,27 +23,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        manager.userAgeFlow.asLiveData().observe(this) { age ->
-            if (age > 0)
-                age?.let {
-                    binding.tvAge.text = getString(R.string.tv_age, it)
-                }
+        lifecycleScope.launch {
+            manager.userAgeFlow.collect { age ->
+                if (age > 0)
+                    binding.tvAge.text = getString(R.string.tv_age, age)
+            }
+        }
+        lifecycleScope.launch {
+            manager.userNameFlow.collect { name ->
+                if (name.isNotEmpty())
+                    binding.tvName.text = getString(R.string.tv_username, name)
+            }
         }
 
+        lifecycleScope.launch {
+            manager.userNoFlow.collect { regno ->
+                if (regno > 0L)
+                    binding.tvUserno.text = getString(R.string.tv_regno, regno)
 
-        manager.userNameFlow.asLiveData().observe(this) { name ->
-            if (name.isNotEmpty())
-                name?.let {
-                    binding.tvName.text = getString(R.string.tv_username, it)
-                }
+            }
         }
 
-        manager.userNoFlow.asLiveData().observe(this) { regno ->
-            if (regno > 0L)
-                regno?.let {
-                    binding.tvUserno.text = getString(R.string.tv_regno, it)
-                }
-        }
     }
 
 
@@ -71,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun validateData(name: String, age: String, regNo: String): Boolean {
-        var valResult = true;
+        var valResult = true
 
         if (name.isEmpty()) {
 

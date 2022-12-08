@@ -6,5 +6,6 @@
     <string name="tv_age">Age : %d</string>
     <string name="tv_username">Name: %s</string>
     <string name="tv_regno">Registration No\n%d</string>
+    <string name="hint_user_name">user name</string>
 
 </resources>
